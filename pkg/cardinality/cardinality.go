@@ -14,48 +14,47 @@ import (
 )
 
 const (
-	Namespace      = "cardinality_exporter"
+	Namespace = "cardinality_exporter"
 )
 
 type Metrics struct {
-	SeriesCountByMetricName prometheus.GaugeVec
-	LabelValueCountByLabelName prometheus.GaugeVec
-	MemoryInBytesByLabelName prometheus.GaugeVec
+	SeriesCountByMetricName     prometheus.GaugeVec
+	LabelValueCountByLabelName  prometheus.GaugeVec
+	MemoryInBytesByLabelName    prometheus.GaugeVec
 	SeriesCountByLabelValuePair prometheus.GaugeVec
 }
-
 
 func NewMetrics() *Metrics {
 	return &Metrics{
 		SeriesCountByMetricName: *prometheus.NewGaugeVec(
 			prometheus.GaugeOpts{
 				Namespace: Namespace,
-				Name: "series_count_by_metric_name",
-				Help: "Timeseries count by metric name.",
+				Name:      "series_count_by_metric_name",
+				Help:      "Timeseries count by metric name.",
 			},
 			[]string{"metric"},
 		),
 		LabelValueCountByLabelName: *prometheus.NewGaugeVec(
 			prometheus.GaugeOpts{
 				Namespace: Namespace,
-				Name: "label_value_count_by_label_name",
-				Help: "Label values count by label.",
+				Name:      "label_value_count_by_label_name",
+				Help:      "Label values count by label.",
 			},
 			[]string{"label"},
 		),
 		MemoryInBytesByLabelName: *prometheus.NewGaugeVec(
 			prometheus.GaugeOpts{
 				Namespace: Namespace,
-				Name: "memory_by_label_bytes",
-				Help: "Amount of memory used per label.",
+				Name:      "memory_by_label_bytes",
+				Help:      "Amount of memory used per label.",
 			},
 			[]string{"label"},
 		),
 		SeriesCountByLabelValuePair: *prometheus.NewGaugeVec(
 			prometheus.GaugeOpts{
 				Namespace: Namespace,
-				Name: "series_count_by_label_value_pair",
-				Help: "Count of unique label/value pairs.",
+				Name:      "series_count_by_label_value_pair",
+				Help:      "Count of unique label/value pairs.",
 			},
 			[]string{"label"},
 		),
@@ -132,6 +131,6 @@ func (m *Metrics) ProbeTSDBAPI(probeURL string, timeout time.Duration, logger lo
 	for _, labelValuePair := range tsdbStatus.Data.SeriesCountByLabelValuePair {
 		m.SeriesCountByLabelValuePair.WithLabelValues(labelValuePair.Label).Set(float64(labelValuePair.Value))
 	}
-	
+
 	return nil
 }
