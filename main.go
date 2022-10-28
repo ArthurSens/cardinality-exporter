@@ -16,7 +16,7 @@ import (
 
 const (
 	metricsPath    = "/metrics"
-	listenAddress  = ":8080"
+	listenAddress  = ":9091"
 	probeURL       = "http://localhost:9090"
 	interval       = 1
 	timeoutSeconds = 60

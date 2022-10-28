@@ -18,7 +18,7 @@ make build
 Or as a docker image:
 ```
 make docker-build
-docker run -p 8080:8080 ghcr.io/arthursens/cardinality-exporter:main
+docker run -p 9091:9091 ghcr.io/arthursens/cardinality-exporter:main
 ```
 
 By clicking in the button below, you'll have ready-to-go Cloud Develepor Environment to develop cardinality-exporter:
