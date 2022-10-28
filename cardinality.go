@@ -1,4 +1,4 @@
-package cardinality
+package main
 
 import (
 	"encoding/json"

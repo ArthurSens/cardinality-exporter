@@ -5,7 +5,6 @@ import (
 	"os"
 	"time"
 
-	"github.com/ArthurSens/cardinality-exporter/pkg/cardinality"
 	"github.com/go-kit/log"
 	"github.com/go-kit/log/level"
 	"github.com/prometheus/client_golang/prometheus"
@@ -28,8 +27,8 @@ var (
 )
 
 func main() {
-	metrics := cardinality.NewMetrics()
-	prometheus.MustRegister(version.NewCollector(cardinality.Namespace))
+	metrics := NewMetrics()
+	prometheus.MustRegister(version.NewCollector(Namespace))
 	prometheus.MustRegister(metrics.SeriesCountByMetricName)
 	prometheus.MustRegister(metrics.LabelValueCountByLabelName)
 	prometheus.MustRegister(metrics.MemoryInBytesByLabelName)
